@@ -17,7 +17,7 @@ class DemoApplicationTests {
 
 	@Test
 	void failTest() {
-		int a = 2 + 2;
+		int a = 2 + 1;
 
 		assertEquals(3, a);
 	}
