@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: Simple Learning API
+  description: A simple API for learning
+  version: 1.0.0
+
+paths:
+  /hello:
+    get:
+      summary: Test
+      operationId: getHello
+      tags:
+        - Hello
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelloWorldApiResponse'
+
+
+
+components:
+  schemas:
+    HelloWorldApiResponse:
+      type: object
+      properties:
+        value:
+          type: string
