@@ -15,4 +15,11 @@ class DemoApplicationTests {
 		assertEquals(4, a);
 	}
 
+	@Test
+	void failTest() {
+		int a = 2 + 1;
+
+		assertEquals(3, a);
+	}
+
 }
