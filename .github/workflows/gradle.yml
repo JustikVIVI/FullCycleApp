@@ -13,6 +13,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  AWS_REGION: us-east-1
+  S3BUCKET: codedeploystack-webappdeploymentbucket-grjzef3os8x2
+
 jobs:
   build:
 
@@ -27,17 +31,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-
-    # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
-    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
-
-    - shell: bash
-      env:
-        SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
-      run: |
-        echo "HELLO TRYING"
-        echo "$SUPER_SECRET"
-        echo "Secret should be shown already"
 
     - name: OpenApiGenerate
       run: ./gradlew openApiGenerate
@@ -76,14 +69,22 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [ aws-ec2 ]
+    runs-on: ubuntu-latest
+    environment: Dev
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      - name: Pull Image from docker hub
-        run: sudo docker pull ilsosnin/learning_repo:latest
-      - name: Delete old container
-        run: sudo docker rm -f learning_repo_container
-      - name: Run Docker Image
-        run: sudo docker run -d -p 8080:8080 --name learning_repo_container ilsosnin/learning_repo
+      - uses: actions/checkout@v2
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+          role-session-name: GitHub-Action-Role
+          aws-region: ${{ env.AWS_REGION }}
+      - run: |
+          echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
+          commit_hash=`git rev-parse HEAD`
+          aws deploy create-deployment --application-name CodeDeployAppNameWithASG --deployment-group-name CodeDeployGroupName --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
 
   dependency-submission:
 
