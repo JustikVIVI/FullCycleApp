@@ -18,6 +18,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HelloWorldApiResponse'
+  /send:
+    get:
+      summary: Just a bit of trolling
+      operationId: getMeme
+      tags:
+        - memes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelloWorldApiResponse'
 
 
 
