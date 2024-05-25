@@ -74,17 +74,6 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/learning_repo:latest
 
-  deploy:
-    needs: build
-    runs-on: [ aws-ec2 ]
-    steps:
-      - name: Pull Image from docker hub
-        run: sudo docker pull ilsosnin/learning_repo:latest
-      - name: Delete old container
-        run: sudo docker rm -f learning_repo_container
-      - name: Run Docker Image
-        run: sudo docker run -d -p 8080:8080 --name learning_repo_container ilsosnin/learning_repo
-
   dependency-submission:
 
     runs-on: ubuntu-latest
