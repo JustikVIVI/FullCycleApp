@@ -30,6 +30,8 @@ dependencies {
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.openapitools:jackson-databind-nullable:0.2.6")
     implementation("javax.servlet:javax.servlet-api:3.0.1")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.postgresql:postgresql")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -40,8 +42,8 @@ tasks.withType<Test> {
 }
 
 openApiGenerate {
-    generatorName.set("spring") // Choose the generator (e.g., "spring", "java", etc.)
-    inputSpec.set("$rootDir/src/main/resources/api.yaml") // Path to your OpenAPI spec
+    generatorName.set("spring")
+    inputSpec.set("$rootDir/src/main/resources/api.yaml") // Path your OpenAPI spec
     outputDir.set(generatedSourcesDir)
     configOptions.set(
         mapOf(

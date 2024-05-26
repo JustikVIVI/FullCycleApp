@@ -18,6 +18,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HelloWorldApiResponse'
+
+  /hello/all:
+    get:
+      summary: Test
+      operationId: getAllHello
+      tags:
+        - Hello
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HelloWorldApiResponse'
   /send:
     get:
       summary: Just a bit of trolling

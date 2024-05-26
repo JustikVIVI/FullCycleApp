@@ -96,7 +96,7 @@ jobs:
             docker pull ilsosnin/learning_repo:latest
             docker stop learning_repo_container || true
             docker rm -f learning_repo_container
-            docker run -d --name learning_repo_container -p 9000:8080 ilsosnin/learning_repo:latest
+            docker run -d --name learning_repo_container --network=spring-postgres-network -p 9000:8080 ilsosnin/learning_repo:latest
           EOF
 
   dependency-submission:
