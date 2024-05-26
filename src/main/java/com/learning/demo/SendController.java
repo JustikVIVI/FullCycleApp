@@ -1,10 +1,11 @@
 package com.learning.demo;
 
 import org.openapitools.api.SendApi;
-import org.openapitools.api.SendApi;
 import org.openapitools.model.HelloWorldApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+
+import static java.lang.Math.random;
 
 @Controller
 public class SendController implements SendApi {
