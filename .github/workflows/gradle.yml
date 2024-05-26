@@ -127,7 +127,7 @@ jobs:
           VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
         run: |
           ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST -p $VPS_SSH_PORT << 'EOF'
-            cd /path/to/docker-compose-directory
+            cd /root/path/to/docker-compose-directory
             docker-compose down
             docker-compose pull
             docker-compose up -d
