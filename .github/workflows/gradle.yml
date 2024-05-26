@@ -106,6 +106,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
+      - name: Add VPS to known hosts
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
+        run: |
+          ssh-keyscan -p $VPS_SSH_PORT $VPS_HOST >> ~/.ssh/known_hosts
+
       - name: Copy docker-compose.yml to VPS
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
