@@ -106,6 +106,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
+      - name: Copy docker-compose.yml to VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
+        run: scp -P $VPS_SSH_PORT docker-compose.yml $VPS_USER@$VPS_HOST:/path/to/docker-compose-directory/
+
       - name: Deploy to VPS
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
@@ -113,7 +120,6 @@ jobs:
           VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
         run: |
           ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST -p $VPS_SSH_PORT << 'EOF'
-            scp -P $VPS_SSH_PORT docker-compose.yml $VPS_USER@$VPS_HOST:/path/to/docker-compose-directory
             cd /path/to/docker-compose-directory
             docker-compose down
             docker-compose pull
