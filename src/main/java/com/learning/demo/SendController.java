@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public final class SendController implements SendApi {
+public class SendController implements SendApi {
 
     @Override
     public ResponseEntity<HelloWorldApiResponse> getMeme() {
