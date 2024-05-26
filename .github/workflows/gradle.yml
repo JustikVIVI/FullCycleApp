@@ -118,7 +118,7 @@ jobs:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
           VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
-        run: scp -P $VPS_SSH_PORT docker-compose.yml $VPS_USER@$VPS_HOST:/path/to/docker-compose-directory/
+        run: scp -P $VPS_SSH_PORT docker-compose.yml $VPS_USER@$VPS_HOST:/root/path/to/docker-compose-directory/
 
       - name: Deploy to VPS
         env:
