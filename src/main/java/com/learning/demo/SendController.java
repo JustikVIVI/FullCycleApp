@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 public class SendController implements SendApi {
 
     @Override
+    // TODO: lets create a possible problems
     public ResponseEntity<HelloWorldApiResponse> getMeme() {
         HelloWorldApiResponse response = new HelloWorldApiResponse();
         response.setValue("SEND NUDES");
+        response = null;
+        response.setValue("hello");
         return ResponseEntity.ok(response);
     }
 }
