@@ -1,6 +1,6 @@
 package com.learning.demo;
 
-import org.openapitools.api.HelloApi;
+import org.openapitools.api.SendApi;
 import org.openapitools.api.SendApi;
 import org.openapitools.model.HelloWorldApiResponse;
 import org.springframework.http.ResponseEntity;
