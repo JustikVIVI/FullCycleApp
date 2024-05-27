@@ -1,8 +1,11 @@
+# application-local.yml
+
 spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/test_db}
     username: ${SPRING_DATASOURCE_USERNAME:test_user}
     password: ${SPRING_DATASOURCE_PASSWORD:test_password}
+    driverClassName: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
