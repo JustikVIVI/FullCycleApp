@@ -50,6 +50,8 @@ jobs:
 
     - name: Test with Gradle Wrapper
       run: ./gradlew test
+      env:
+        SPRING_PROFILES_ACTIVE: test
 
     - name: Save artifacts
       uses: actions/upload-artifact@v2
