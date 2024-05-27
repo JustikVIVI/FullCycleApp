@@ -39,6 +39,10 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+tasks.compileJava {
+    dependsOn("openApiGenerate")
+}
+
 openApiGenerate {
     generatorName.set("spring") // Choose the generator (e.g., "spring", "java", etc.)
     inputSpec.set("$rootDir/src/main/resources/api.yaml") // Path to your OpenAPI spec
