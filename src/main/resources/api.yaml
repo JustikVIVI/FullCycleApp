@@ -60,6 +60,54 @@ paths:
         '500':
           $ref: '#/api-errors.yaml#/InternalServerError'
 
+  /subscription:
+    get:
+      summary: Get all subscriptions list
+      operationId: getSubscription
+      tags:
+        - Subscription
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubscriptionInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+  /subscription/{subscription_id}:
+    get:
+      summary: Get all subscriptions list
+      operationId: getSubscriptionById
+      tags:
+        - Subscription
+      parameters:
+        - name: subscription_id
+          in: path
+          description: Subscription UUID to get
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
 
 components:
   schemas:
@@ -72,13 +120,7 @@ components:
         email:
           type: string
         subscription:
-          type: string
-          enum:
-            - FREE
-            - S
-            - M
-            - L
-            - XL
+          $ref: '#/components/schemas/SubscriptionInfo'
         registration_date:
           type: string
           format: date
@@ -101,3 +143,26 @@ components:
         - name
         - email
         - subscription_id
+
+    SubscriptionInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        subscription_level:
+          type: number
+        type:
+          type: string
+          enum:
+            - FREE
+            - S
+            - M
+            - L
+            - XL
+      required:
+        - id
+        - name
+        - subscription_level
+        - type
