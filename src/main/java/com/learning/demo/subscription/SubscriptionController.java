@@ -13,8 +13,12 @@ import java.util.UUID;
 @Controller
 public class SubscriptionController implements SubscriptionApi {
 
-    @Autowired
     private SubscriptionRepository subscriptionRepository;
+
+    @Autowired
+    public SubscriptionController(SubscriptionRepository subscriptionRepository) {
+        this.subscriptionRepository = subscriptionRepository;
+    }
 
     @Override
     public ResponseEntity<List<SubscriptionInfo>> getSubscription() {

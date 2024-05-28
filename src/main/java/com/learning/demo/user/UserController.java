@@ -13,8 +13,12 @@ import java.util.UUID;
 @Controller
 public class UserController implements UserApi {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public ResponseEntity<UserInfo> createUser(CreateUserRequest createUserRequest) {
