@@ -1,0 +1,42 @@
+BadRequest:
+  description: Bad Request
+  content:
+    'application/json':
+      schema:
+        $ref: '../schemas/error.yaml#/ErrorApiResponse'
+InternalServerError:
+  description: Internal Server Error
+  content:
+    'application/json':
+      schema:
+        $ref: '../schemas/error.yaml#/ErrorApiResponse'
+NotFound:
+  description: Not Found
+  content:
+    'application/json':
+      schema:
+        $ref: '../schemas/error.yaml#/ErrorApiResponse'
+Unauthorized:
+  description: Unauthorized
+  content:
+    'application/json':
+      schema:
+        $ref: '../schemas/error.yaml#/ErrorApiResponse'
+UnexpectedError:
+  description: Unexpected Error
+  content:
+    'application/json':
+      schema:
+        $ref: '../schemas/error.yaml#/ErrorApiResponse'
+Forbidden:
+  description: Forbidden
+  content:
+    'application/json':
+      schema:
+        $ref: '../schemas/error.yaml#/ErrorApiResponse'
+UnsupportedMediaType:
+  description: Unsupported Media Type
+  content:
+    'application/json':
+      schema:
+        $ref: '../schemas/error.yaml#/ErrorApiResponse'

@@ -5,53 +5,99 @@ info:
   version: 1.0.0
 
 paths:
-  /hello:
+  /user/{user_id}:
     get:
-      summary: Test
-      operationId: getHello
+      summary: Get user info
+      operationId: getUser
       tags:
-        - Hello
+        - User
+      parameters:
+        - name: user_id
+          in: path
+          description: User UUID to get
+          required: true
+          schema:
+            type: string
+            format: UUID
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HelloWorldApiResponse'
-  /send:
-    get:
-      summary: Just a bit of trolling
-      operationId: getMeme
+                $ref: '#/components/schemas/UserInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+
+  /user/create:
+    post:
       tags:
-        - memes
+        - User
+      description: Create new User
+      operationId: createUser
+      requestBody:
+        description: Create new User body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HelloWorldApiResponse'
-  /hello/all:
-    get:
-      summary: Test
-      operationId: getAllHello
-      tags:
-        - Hello
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/HelloWorldApiResponse'
+                $ref: '#/components/schemas/UserInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
 
 
 components:
   schemas:
-    HelloWorldApiResponse:
+    UserInfo:
       type: object
       properties:
-        value:
+        id:
           type: string
+          format: UUID
+        email:
+          type: string
+        subscription:
+          type: string
+          enum:
+            - FREE
+            - S
+            - M
+            - L
+            - XL
+        registration_date:
+          type: string
+          format: date
+      required:
+        - id
+        - email
+        - subscription
+        - registration_date
+
+    CreateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        subscription_id:
+          type: string
+      required:
+        - name
+        - email
+        - subscription_id
