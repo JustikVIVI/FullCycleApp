@@ -5,38 +5,67 @@ info:
   version: 1.0.0
 
 paths:
-  /hello:
+  /user/{user_id}:
     get:
-      summary: Test
-      operationId: getHello
+      summary: Get user info
+      operationId: getUser
       tags:
-        - Hello
+        - User
+      parameters:
+        - name: user_id
+          in: path
+          description: User UUID to get
+          required: true
+          schema:
+            type: string
+            format: UUID
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HelloWorldApiResponse'
-  /send:
-    get:
-      summary: Just a bit of trolling
-      operationId: getMeme
+                $ref: '#/components/schemas/UserInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+
+  /user/create:
+    post:
       tags:
-        - memes
+        - User
+      description: Create new User
+      operationId: createUser
+      requestBody:
+        description: Create new User body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HelloWorldApiResponse'
-  /hello/all:
+                $ref: '#/components/schemas/UserInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+
+  /subscription:
     get:
-      summary: Test
-      operationId: getAllHello
+      summary: Get all subscriptions list
+      operationId: getSubscription
       tags:
-        - Hello
+        - Subscription
       responses:
         '200':
           description: Success
@@ -45,13 +74,95 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/HelloWorldApiResponse'
-
+                  $ref: '#/components/schemas/SubscriptionInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+  /subscription/{subscription_id}:
+    get:
+      summary: Get all subscriptions list
+      operationId: getSubscriptionById
+      tags:
+        - Subscription
+      parameters:
+        - name: subscription_id
+          in: path
+          description: Subscription UUID to get
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
 
 components:
   schemas:
-    HelloWorldApiResponse:
+    UserInfo:
       type: object
       properties:
-        value:
+        id:
           type: string
+          format: UUID
+        email:
+          type: string
+        subscription:
+          $ref: '#/components/schemas/SubscriptionInfo'
+        registration_date:
+          type: string
+          format: date
+      required:
+        - id
+        - email
+        - subscription
+        - registration_date
+
+    CreateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        subscription_id:
+          type: string
+      required:
+        - name
+        - email
+        - subscription_id
+
+    SubscriptionInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        subscription_level:
+          type: number
+        type:
+          type: string
+          enum:
+            - FREE
+            - S
+            - M
+            - L
+            - XL
+      required:
+        - id
+        - name
+        - subscription_level
+        - type
