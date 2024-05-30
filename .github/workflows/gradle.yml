@@ -17,6 +17,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: main
+          POSTGRES_PASSWORD: 1234
+          POSTGRES_DB: learning_db
+
     permissions:
       contents: read
 
@@ -39,9 +50,6 @@ jobs:
         echo "$SUPER_SECRET"
         echo "Secret should be shown already"
 
-    - name: OpenApiGenerate
-      run: ./gradlew openApiGenerate
-
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
@@ -52,6 +60,7 @@ jobs:
       run: ./gradlew test
       env:
         SPRING_PROFILES_ACTIVE: test
+        SKIP_MIGRATE: true
 
     - name: Save artifacts
       uses: actions/upload-artifact@v2

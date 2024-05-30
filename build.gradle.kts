@@ -1,8 +1,11 @@
+import org.flywaydb.gradle.task.FlywayMigrateTask
+
 plugins {
     java
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
     id("org.openapi.generator") version "7.5.0"
+    id("org.flywaydb.flyway") version "9.22.3"
 }
 
 // generated sources of openapi generate task
@@ -44,7 +47,15 @@ tasks.withType<Test> {
 }
 
 tasks.compileJava {
+    dependsOn("migrateDb")
     dependsOn("openApiGenerate")
+}
+
+tasks.register("migrateDb", FlywayMigrateTask::class.java) {
+    url = System.getenv("JDBC_DATABASE_URL") ?: "jdbc:postgresql://localhost:5432/learning_db?user=main&password=1234"
+    user = ""
+    password = ""
+    locations = arrayOf("classpath:db/common")
 }
 
 openApiGenerate {
