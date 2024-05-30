@@ -81,6 +81,7 @@ paths:
           $ref: '#/api-errors.yaml#/Unauthorized'
         '500':
           $ref: '#/api-errors.yaml#/InternalServerError'
+
   /subscription/{subscription_id}:
     get:
       summary: Get all subscriptions list
@@ -102,6 +103,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SubscriptionInfo'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+
+  /trainings:
+    get:
+      summary: Get all trainings list
+      operationId: getTrainings
+      tags:
+        - Trainings
+      parameters:
+        - name: date
+          in: query
+          schema:
+            type: string
+          example: "2022-07-24"
+          required: true
+        - name: subscription_level
+          in: query
+          schema:
+            type: number
+          required: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+
+  /trainings/{training_id}:
+    get:
+      summary: Get training info
+      operationId: getTrainingInfo
+      tags:
+        - Trainings
+      parameters:
+        - name: training_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
+        '400':
+          $ref: '#/api-errors.yaml#/BadRequest'
+        '401':
+          $ref: '#/api-errors.yaml#/Unauthorized'
+        '500':
+          $ref: '#/api-errors.yaml#/InternalServerError'
+
+  /trainings/create:
+    post:
+      summary: Creates a training
+      operationId: createTraining
+      tags:
+        - Trainings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTraining'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Training'
         '400':
           $ref: '#/api-errors.yaml#/BadRequest'
         '401':
@@ -149,6 +234,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         subscription_level:
@@ -166,3 +252,51 @@ components:
         - name
         - subscription_level
         - type
+
+    CreateTraining:
+      type: object
+      properties:
+        name:
+          type: string
+        date:
+          type: string
+          example: "2024-07-24"
+        type:
+          type: string
+          enum:
+            - POOOOWER
+            - Yoga
+            - Chilling
+        required_level:
+          description: Minimal required subscription level to attend this class
+          type: int
+      required:
+        - name
+        - type
+        - required_level
+
+    Training:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        date:
+          type: string
+          example: "2024-07-24"
+        type:
+          type: string
+          enum:
+            - POOOOWER
+            - Yoga
+            - Chilling
+        required_level:
+          description: Minimal required subscription level to attend this class
+          type: int
+      required:
+        - id
+        - name
+        - type
+        - required_level
