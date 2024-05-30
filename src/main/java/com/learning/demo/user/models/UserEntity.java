@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.sql.Date;
+
 @Entity(name = "users")
 public class UserEntity {
 
@@ -18,7 +20,7 @@ public class UserEntity {
 
     private String subscriptionId;
 
-    private String dateRegistered;
+    private Date dateRegistered;
 
     public String getId() {
         return id;
@@ -48,11 +50,11 @@ public class UserEntity {
         this.subscriptionId = subscriptionId;
     }
 
-    public String getDateRegistered() {
+    public Date getDateRegistered() {
         return dateRegistered;
     }
 
-    public void setDateRegistered(String dateRegistered) {
+    public void setDateRegistered(Date dateRegistered) {
         this.dateRegistered = dateRegistered;
     }
 }

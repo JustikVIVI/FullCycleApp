@@ -52,6 +52,7 @@ jobs:
       run: ./gradlew test
       env:
         SPRING_PROFILES_ACTIVE: test
+        SKIP_MIGRATE: true
 
     - name: Save artifacts
       uses: actions/upload-artifact@v2
