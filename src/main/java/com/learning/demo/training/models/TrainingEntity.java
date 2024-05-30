@@ -57,6 +57,6 @@ public class TrainingEntity {
     }
 
     private enum TrainingType {
-        POOOOWER, Yoga, Chilling
+        POOOOWER, YOGA, CHILLING
     }
 }
