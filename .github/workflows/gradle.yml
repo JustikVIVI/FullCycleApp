@@ -17,6 +17,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: main
+          POSTGRES_PASSWORD: 1234
+          POSTGRES_DB: learning_db
+
     permissions:
       contents: read
 
@@ -38,6 +49,18 @@ jobs:
         echo "HELLO TRYING"
         echo "$SUPER_SECRET"
         echo "Secret should be shown already"
+
+    - name: Pull PostgreSQL Docker image
+      run: docker pull postgres:latest
+
+    - name: Start PostgreSQL container
+      run: docker run --name postgres -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test_db -p 5432:5432 -d postgres:latest
+
+    - name: Wait for PostgreSQL to be ready
+      run: |
+        until docker exec postgres pg_isready ; do
+          sleep 1
+        done
 
     - name: OpenApiGenerate
       run: ./gradlew openApiGenerate

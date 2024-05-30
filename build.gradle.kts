@@ -56,11 +56,6 @@ tasks.register("migrateDb", FlywayMigrateTask::class.java) {
     user = ""
     password = ""
     locations = arrayOf("classpath:db/common")
-
-    // Check the active profile and disable the task if the profile is 'test'
-    onlyIf {
-        System.getenv("SKIP_MIGRATE") != "true"
-    }
 }
 
 openApiGenerate {
