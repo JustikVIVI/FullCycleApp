@@ -1,24 +1,24 @@
-CREATE TABLE subscription
+create table subscription
 (
-    id                  uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-    name                VARCHAR NOT NULL,
-    subscription_level  INTEGER NOT NULL
+    id                  uuid default gen_random_uuid() primary key,
+    name                varchar(255) not null,
+    subscription_level  integer not null
 );
 
-CREATE TABLE users
+create table users
 (
-    id                  uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-    name                VARCHAR NOT NULL,
-    email               VARCHAR NOT NULL,
-    subscription_id     UUID NOT NULL,
-    date_registered     TIMESTAMP without TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    id                  uuid default gen_random_uuid() primary key,
+    name                varchar(255) not null,
+    email               varchar(255) not null,
+    subscription_id     UUID not null,
+    date_registered     timestamp without time zone default current_timestamp
 );
 
-CREATE TABLE trainings
+create table trainings
 (
-    id                  uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-    name                VARCHAR NOT NULL,
-    type                VARCHAR NOT NULL,
-    subscription_level  INTEGER NOT NULL,
-    training_date       TIMESTAMP without TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    id                  uuid default gen_random_uuid() primary key,
+    name                varchar(255) not null,
+    type                varchar(255) not null,
+    subscription_level  integer not null,
+    training_date       timestamp without time zone default current_timestamp
 );
