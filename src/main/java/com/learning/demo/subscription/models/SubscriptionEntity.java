@@ -2,7 +2,7 @@ package com.learning.demo.subscription.models;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "subscription")
 public class SubscriptionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
