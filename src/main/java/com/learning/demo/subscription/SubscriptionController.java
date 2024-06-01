@@ -1,6 +1,5 @@
 package com.learning.demo.subscription;
 
-import com.learning.demo.subscription.repository.SubscriptionRepository;
 import org.openapitools.api.SubscriptionApi;
 import org.openapitools.model.SubscriptionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +12,19 @@ import java.util.UUID;
 @Controller
 public class SubscriptionController implements SubscriptionApi {
 
-    private SubscriptionRepository subscriptionRepository;
+    private SubscriptionService service;
 
-    @Autowired
-    public SubscriptionController(SubscriptionRepository subscriptionRepository) {
-        this.subscriptionRepository = subscriptionRepository;
+    public SubscriptionController(SubscriptionService service) {
+        this.service = service;
     }
 
     @Override
-    public ResponseEntity<List<SubscriptionInfo>> getSubscription() {
-        return SubscriptionApi.super.getSubscription();
+    public ResponseEntity<List<SubscriptionInfo>> getSubscriptions() {
+        return ResponseEntity.ok(service.getAllSubscriptions());
     }
 
     @Override
     public ResponseEntity<SubscriptionInfo> getSubscriptionById(UUID subscriptionId) {
-        return SubscriptionApi.super.getSubscriptionById(subscriptionId);
+        return ResponseEntity.ok(service.getSubscriptionById(subscriptionId));
     }
 }

@@ -63,7 +63,7 @@ paths:
   /subscription:
     get:
       summary: Get all subscriptions list
-      operationId: getSubscription
+      operationId: getSubscriptions
       tags:
         - Subscription
       responses:
@@ -235,10 +235,8 @@ components:
         id:
           type: string
           format: uuid
-        name:
-          type: string
         subscription_level:
-          type: number
+          type: integer
         type:
           type: string
           enum:
