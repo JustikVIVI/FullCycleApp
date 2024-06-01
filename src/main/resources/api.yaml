@@ -126,7 +126,7 @@ paths:
         - name: subscription_level
           in: query
           schema:
-            type: number
+            type: integer
           required: false
       responses:
         '200':
@@ -134,7 +134,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Training'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Training'
         '400':
           $ref: '#/api-errors.yaml#/BadRequest'
         '401':

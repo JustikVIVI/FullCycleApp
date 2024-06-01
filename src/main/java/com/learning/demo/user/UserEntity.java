@@ -1,4 +1,4 @@
-package com.learning.demo.user.models;
+package com.learning.demo.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

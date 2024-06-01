@@ -1,4 +1,4 @@
-package com.learning.demo.training.models;
+package com.learning.demo.training;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,7 +56,7 @@ public class TrainingEntity {
         this.trainingType = trainingType;
     }
 
-    private enum TrainingType {
+    enum TrainingType {
         POOOOWER, YOGA, CHILLING
     }
 }

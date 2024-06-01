@@ -1,6 +1,5 @@
 package com.learning.demo.training;
 
-import com.learning.demo.training.repository.TrainingRepository;
 import org.openapitools.api.TrainingsApi;
 import org.openapitools.model.CreateTraining;
 import org.openapitools.model.Training;
@@ -9,29 +8,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Controller
 public class TrainingController implements TrainingsApi {
 
-    private TrainingRepository trainingRepository;
+    private final TrainingService service;
 
     @Autowired
-    public TrainingController(TrainingRepository trainingRepository) {
-        this.trainingRepository = trainingRepository;
+    public TrainingController(TrainingService service) {
+        this.service = service;
     }
 
     @Override
     public ResponseEntity<Training> createTraining(CreateTraining createTraining) {
-        return TrainingsApi.super.createTraining(createTraining);
+        return service.createTraining(createTraining);
     }
 
     @Override
     public ResponseEntity<Training> getTrainingInfo(String trainingId) {
-        return TrainingsApi.super.getTrainingInfo(trainingId);
+        return service.getTrainingInfo(trainingId);
     }
 
     @Override
-    public ResponseEntity<Training> getTrainings(String date, BigDecimal subscriptionLevel) {
-        return TrainingsApi.super.getTrainings(date, subscriptionLevel);
+    public ResponseEntity<List<Training>> getTrainings(String date, Integer subscriptionLevel) {
+        return service.getTrainings(date, subscriptionLevel);
     }
 }

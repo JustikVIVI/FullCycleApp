@@ -1,6 +1,5 @@
 package com.learning.demo.user;
 
-import com.learning.demo.user.repository.UserRepository;
 import org.openapitools.api.UserApi;
 import org.openapitools.model.CreateUserRequest;
 import org.openapitools.model.UserInfo;
@@ -13,20 +12,20 @@ import java.util.UUID;
 @Controller
 public class UserController implements UserApi {
 
-    private UserRepository userRepository;
+    private UserService service;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService service) {
+        this.service = service;
     }
 
     @Override
     public ResponseEntity<UserInfo> createUser(CreateUserRequest createUserRequest) {
-        return UserApi.super.createUser(createUserRequest);
+        return ResponseEntity.ok(service.createUser(createUserRequest));
     }
 
     @Override
     public ResponseEntity<UserInfo> getUser(UUID userId) {
-        return UserApi.super.getUser(userId);
+        return ResponseEntity.ok(service.getUser(userId));
     }
 }
