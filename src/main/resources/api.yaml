@@ -5,6 +5,18 @@ info:
   version: 1.0.0
 
 paths:
+  /:
+    get:
+      summary: Homepage
+      operationId: getHomepage
+      responses:
+        '200':
+          description: Success
+          content:
+            text/html:
+              schema:
+                type: string
+                example: pong
   /user/{user_id}:
     get:
       summary: Get user info
