@@ -56,6 +56,7 @@ tasks.register("migrateDb", FlywayMigrateTask::class.java) {
     user = ""
     password = ""
     locations = arrayOf("classpath:db/common")
+    baselineOnMigrate = true
 
     doFirst {
         println ("Flyway Locations: ${locations[0]}")
