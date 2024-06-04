@@ -55,6 +55,10 @@ tasks.withType<Test> {
     systemProperty("spring.profiles.active", "test")
 }
 
+tasks.withType<ProcessResources> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 tasks.compileJava {
     dependsOn("migrateDb")
     dependsOn("openApiGenerate")
