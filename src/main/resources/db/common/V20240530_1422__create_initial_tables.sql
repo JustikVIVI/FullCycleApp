@@ -1,11 +1,11 @@
-create table subscription
+create table if not exists subscription
 (
     id                  varchar(255) default gen_random_uuid() primary key,
     name                varchar(255) not null,
     level  integer not null
 );
 
-create table users
+create table if not exists users
 (
     id                  varchar(255) default gen_random_uuid() primary key,
     name                varchar(255) not null,
@@ -14,7 +14,7 @@ create table users
     date_registered     timestamp without time zone default current_timestamp
 );
 
-create table trainings
+create table if not exists trainings
 (
     id                  uuid default gen_random_uuid() primary key,
     name                varchar(255) not null,

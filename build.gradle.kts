@@ -52,6 +52,7 @@ tasks.compileJava {
 }
 
 tasks.register("migrateDb", FlywayMigrateTask::class.java) {
+    dependsOn("processResources")
     url = System.getenv("JDBC_DATABASE_URL") ?: "jdbc:postgresql://localhost:5432/learning_db?user=main&password=1234"
     user = ""
     password = ""
