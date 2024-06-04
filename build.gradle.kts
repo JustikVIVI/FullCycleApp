@@ -14,6 +14,15 @@ sourceSets.getByName("main").java {
     srcDir("$generatedSourcesDir/src/main/java")
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir("src/main/resources")
+        }
+    }
+}
+
+
 group = "com.learning"
 version = "0.0.1"
 
