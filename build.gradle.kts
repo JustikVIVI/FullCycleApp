@@ -65,6 +65,10 @@ tasks.register("migrateDb", FlywayMigrateTask::class.java) {
     user = ""
     password = ""
     locations = arrayOf("classpath:db/common")
+
+    doFirst {
+        println ("Flyway Locations: ${locations[0]}")
+    }
 }
 
 openApiGenerate {
