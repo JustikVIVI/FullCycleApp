@@ -10,7 +10,7 @@ create table if not exists users
     id                  uuid default gen_random_uuid() primary key,
     name                varchar(255) not null,
     email               varchar(255) not null,
-    subscription_id     varchar(255) not null,
+    subscription_id     uuid not null,
     date_registered     date not null
 );
 
