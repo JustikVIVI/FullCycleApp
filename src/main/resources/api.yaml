@@ -277,8 +277,8 @@ components:
           type: string
           enum:
             - POOOOWER
-            - Yoga
-            - Chilling
+            - YOGA
+            - CHILLING
         required_level:
           description: Minimal required subscription level to attend this class
           type: int
@@ -286,6 +286,7 @@ components:
         - name
         - type
         - required_level
+        - date
 
     Training:
       type: object
@@ -302,8 +303,8 @@ components:
           type: string
           enum:
             - POOOOWER
-            - Yoga
-            - Chilling
+            - YOGA
+            - CHILLING
         required_level:
           description: Minimal required subscription level to attend this class
           type: int
@@ -312,3 +313,4 @@ components:
         - name
         - type
         - required_level
+        - date

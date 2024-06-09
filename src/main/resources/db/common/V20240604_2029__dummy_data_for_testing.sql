@@ -15,10 +15,10 @@ VALUES
     ('00000000-0000-0000-0000-000000000005', 'Test user5', 'test5@email.c','a9cf7d30-f7c2-475d-9bfe-b3e3607d0d85', current_timestamp);
 
 
-INSERT INTO trainings (id, name, type, subscription_level, training_date)
+INSERT INTO trainings (id, name, type, subscription_level, date)
 VALUES
     ('70184f15-9625-4ed3-8b49-d7acaa060e56', 'SUPER PUMP', 'POOOOWER', 3, '2024-06-04'),
-    ('62ed1914-806b-4e71-9b86-9f39c728f160', 'easy yoga', 'Yoga', 1, '2024-06-04'),
-    ('44ec527f-bee3-4af4-9c18-4413d1f850ef', 'advanced yoga', 'Yoga', 3, '2024-06-04'),
-    ('38cada81-1bb0-4cb0-a0f5-c3fc31ee191d', 'just waste some time', 'Chilling', 0, '2024-06-04'),
+    ('62ed1914-806b-4e71-9b86-9f39c728f160', 'easy yoga', 'YOGA', 1, '2024-06-04'),
+    ('44ec527f-bee3-4af4-9c18-4413d1f850ef', 'advanced yoga', 'YOGA', 3, '2024-06-04'),
+    ('38cada81-1bb0-4cb0-a0f5-c3fc31ee191d', 'just waste some time', 'CHILLING', 0, '2024-06-04'),
     ('d44186c7-b5d9-4c16-882d-1b96eeef266f', 'Elite training', 'POOOOWER', 4, '2024-06-04');

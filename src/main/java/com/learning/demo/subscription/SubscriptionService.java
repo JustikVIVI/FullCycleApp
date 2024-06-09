@@ -31,7 +31,7 @@ public class SubscriptionService {
 
     private SubscriptionInfo mapToApi(SubscriptionEntity entity) {
         return new SubscriptionInfo(
-                UUID.fromString(entity.getId()),
+                entity.getId(),
                 entity.getLevel(),
                 from(entity.getName())
         );

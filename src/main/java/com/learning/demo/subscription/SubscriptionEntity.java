@@ -2,11 +2,13 @@ package com.learning.demo.subscription;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity(name = "subscription")
 public class SubscriptionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "name")
@@ -14,7 +16,7 @@ public class SubscriptionEntity {
 
     private Integer level;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 

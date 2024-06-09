@@ -6,13 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.sql.Date;
+import java.util.UUID;
 
 @Entity(name = "users")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String name;
 
@@ -22,7 +23,7 @@ public class UserEntity {
 
     private Date dateRegistered;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 

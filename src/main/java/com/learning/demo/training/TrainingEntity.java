@@ -1,26 +1,31 @@
 package com.learning.demo.training;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity(name = "trainings")
 public class TrainingEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String name;
 
-    private String date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date")
+    private LocalDate date;
 
     private Integer subscriptionLevel;
 
-    private TrainingType trainingType;
+    @Enumerated(EnumType.STRING)
+    private TrainingType type;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -32,11 +37,11 @@ public class TrainingEntity {
         this.name = name;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -48,12 +53,12 @@ public class TrainingEntity {
         this.subscriptionLevel = subscriptionLevel;
     }
 
-    public TrainingType getTrainingType() {
-        return trainingType;
+    public TrainingType getType() {
+        return type;
     }
 
-    public void setTrainingType(TrainingType trainingType) {
-        this.trainingType = trainingType;
+    public void setType(TrainingType type) {
+        this.type = type;
     }
 
     enum TrainingType {
