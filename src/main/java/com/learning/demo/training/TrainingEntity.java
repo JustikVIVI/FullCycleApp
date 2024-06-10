@@ -3,7 +3,6 @@ package com.learning.demo.training;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -24,6 +23,15 @@ public class TrainingEntity {
 
     @Enumerated(EnumType.STRING)
     private TrainingType type;
+
+    public TrainingEntity() { }
+
+    public TrainingEntity(String name, LocalDate date, Integer subscriptionLevel, TrainingType type) {
+        this.name = name;
+        this.date = date;
+        this.subscriptionLevel = subscriptionLevel;
+        this.type = type;
+    }
 
     public UUID getId() {
         return id;
@@ -61,7 +69,7 @@ public class TrainingEntity {
         this.type = type;
     }
 
-    enum TrainingType {
+    public enum TrainingType {
         POOOOWER, YOGA, CHILLING
     }
 }

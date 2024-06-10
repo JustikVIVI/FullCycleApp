@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity(name = "users")
@@ -19,9 +20,18 @@ public class UserEntity {
 
     private String email;
 
-    private String subscriptionId;
+    private UUID subscriptionId;
 
-    private Date dateRegistered;
+    private LocalDate dateRegistered;
+
+    public UserEntity() { }
+
+    public UserEntity(String name, String email, UUID subscriptionId, LocalDate dateRegistered) {
+        this.name = name;
+        this.email = email;
+        this.subscriptionId = subscriptionId;
+        this.dateRegistered = dateRegistered;
+    }
 
     public UUID getId() {
         return id;
@@ -43,19 +53,19 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getSubscriptionId() {
+    public UUID getSubscriptionId() {
         return subscriptionId;
     }
 
-    public void setSubscriptionId(String subscriptionId) {
+    public void setSubscriptionId(UUID subscriptionId) {
         this.subscriptionId = subscriptionId;
     }
 
-    public Date getDateRegistered() {
+    public LocalDate getDateRegistered() {
         return dateRegistered;
     }
 
-    public void setDateRegistered(Date dateRegistered) {
+    public void setDateRegistered(LocalDate dateRegistered) {
         this.dateRegistered = dateRegistered;
     }
 }

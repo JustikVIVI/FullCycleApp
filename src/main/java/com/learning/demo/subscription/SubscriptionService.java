@@ -17,7 +17,7 @@ public class SubscriptionService {
     }
 
     public List<SubscriptionInfo> getAllSubscriptions() {
-        List<SubscriptionEntity> subscriptionsDto = repository.findAll();
+        var subscriptionsDto = repository.findAll();
 
         return subscriptionsDto
                 .stream()
@@ -26,7 +26,7 @@ public class SubscriptionService {
     }
 
     public SubscriptionInfo getSubscriptionById(UUID id) {
-        return mapToApi(repository.getReferenceById(id.toString()));
+        return mapToApi(repository.getReferenceById(id));
     }
 
     private SubscriptionInfo mapToApi(SubscriptionEntity entity) {

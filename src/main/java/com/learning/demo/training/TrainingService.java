@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TrainingService {
 
-    private TrainingRepository repository;
+    private final TrainingRepository repository;
 
     @Autowired
     public TrainingService(TrainingRepository repository) {
@@ -20,18 +21,19 @@ public class TrainingService {
     }
 
     public ResponseEntity<Training> createTraining(CreateTraining createTraining) {
-        TrainingEntity training = new TrainingEntity();
-        training.setName(createTraining.getName());
-        training.setType(toEntityTypeFromApiType(createTraining.getType()));
-        training.setDate(LocalDate.parse(createTraining.getDate()));
-        training.setSubscriptionLevel(createTraining.getRequiredLevel());
+        TrainingEntity training = new TrainingEntity(
+                createTraining.getName(),
+                LocalDate.parse(createTraining.getDate()),
+                createTraining.getRequiredLevel(),
+                toEntityTypeFromApiType(createTraining.getType())
+        );
         repository.save(training);
 
         return ResponseEntity.ok(convertEntityToApiType(training));
     }
 
     public ResponseEntity<Training> getTrainingInfo(String trainingId) {
-        return ResponseEntity.ok(convertEntityToApiType(repository.getReferenceById(trainingId)));
+        return ResponseEntity.ok(convertEntityToApiType(repository.getReferenceById(UUID.fromString(trainingId))));
     }
 
     public ResponseEntity<List<Training>> getTrainings(String date, Integer subscriptionLevel) {
