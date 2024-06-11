@@ -20,6 +20,10 @@ public class SubscriptionEntity {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public SubscriptionType getName() {
         return name;
     }
