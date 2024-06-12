@@ -16,8 +16,21 @@ public class SubscriptionEntity {
 
     private Integer level;
 
+    public SubscriptionEntity() {
+    }
+
+    public SubscriptionEntity(UUID id, SubscriptionType name, Integer level) {
+        this.id = id;
+        this.name = name;
+        this.level = level;
+    }
+
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public SubscriptionType getName() {
