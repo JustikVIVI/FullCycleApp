@@ -1,8 +1,8 @@
 package com.learning.demo.subscription;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -21,12 +21,16 @@ public class SubscriptionServiceTest {
     @Mock
     private SubscriptionRepository subscriptionRepository;
 
-    @InjectMocks
-    private SubscriptionService subscriptionService;
+    private SubscriptionService service;
+
+    @BeforeEach
+    public void setUp() {
+        service = new SubscriptionService(subscriptionRepository);
+    }
 
     @Test
     public void testSubscriptionService_whenInitialized_thenNotNull() {
-        assertNotNull(subscriptionService);
+        assertNotNull(service);
     }
 
     @Test
@@ -35,7 +39,7 @@ public class SubscriptionServiceTest {
         when(subscriptionRepository.findAll()).thenReturn(List.of(getDefaultSubscriptionEntity()));
 
         // Act
-        subscriptionService.getAllSubscriptions();
+        service.getAllSubscriptions();
 
         // Assert
         verify(subscriptionRepository).findAll();
@@ -48,7 +52,7 @@ public class SubscriptionServiceTest {
         when(subscriptionRepository.getReferenceById(any())).thenReturn(getDefaultSubscriptionEntity());
 
         // Act
-        subscriptionService.getSubscriptionById(id);
+        service.getSubscriptionById(id);
 
         // Assert
         verify(subscriptionRepository).getReferenceById(id);
