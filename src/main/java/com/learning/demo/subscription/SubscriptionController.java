@@ -12,7 +12,7 @@ import java.util.UUID;
 @Controller
 public class SubscriptionController implements SubscriptionApi {
 
-    private SubscriptionService service;
+    private final SubscriptionService service;
 
     public SubscriptionController(SubscriptionService service) {
         this.service = service;
