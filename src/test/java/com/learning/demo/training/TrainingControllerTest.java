@@ -10,6 +10,8 @@ import org.openapitools.model.CreateTraining;
 import org.openapitools.model.Training;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
@@ -41,14 +43,16 @@ class TrainingControllerTest {
 
     @Test
     public void getTrainings_shouldReturnListOfTrainings() {
+        var date = LocalDate.now();
+        var subscriptionLevel = 1;
         var training = mock(Training.class);
-        var trainingId = UUID.randomUUID().toString();
 
-        when(trainingService.getTrainingInfo(trainingId)).thenReturn(ResponseEntity.ok(training));
+        when(trainingService.getTrainings(date.toString(), subscriptionLevel))
+                .thenReturn(ResponseEntity.ok(List.of(training)));
 
-        trainingController.getTrainingInfo(trainingId);
+        trainingController.getTrainings(date.toString(), subscriptionLevel);
 
-        verify(trainingService, Mockito.times(1)).getTrainingInfo(trainingId);
+        verify(trainingService, Mockito.times(1)).getTrainings(date.toString(), subscriptionLevel);
     }
 
     @Test
