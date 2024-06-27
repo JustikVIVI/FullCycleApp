@@ -10,4 +10,4 @@ spring:
     show-sql: true
   data:
     mongodb:
-      uri: mongodb://104.234.61.104:27017/main_db
+      uri: ${MONGO_DATABASE_URL}
