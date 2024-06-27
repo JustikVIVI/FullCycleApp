@@ -1,5 +1,6 @@
 package com.learning.demo.subscription;
 
+import com.learning.demo.mongologs.MongoLogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,11 +18,14 @@ class SubscriptionControllerTest {
     @Mock
     private SubscriptionService subscriptionService;
 
+    @Mock
+    private MongoLogRepository repository;
+
     private SubscriptionController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new SubscriptionController(subscriptionService);
+        controller = new SubscriptionController(subscriptionService, repository);
     }
 
     @Test

@@ -1,5 +1,7 @@
 package com.learning.demo.subscription;
 
+import com.learning.demo.mongologs.MongoLog;
+import com.learning.demo.mongologs.MongoLogRepository;
 import org.openapitools.api.SubscriptionApi;
 import org.openapitools.model.SubscriptionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +15,17 @@ import java.util.UUID;
 public class SubscriptionController implements SubscriptionApi {
 
     private final SubscriptionService service;
+    private final MongoLogRepository logRepository;
 
-    public SubscriptionController(SubscriptionService service) {
+    public SubscriptionController(SubscriptionService service, MongoLogRepository repository) {
+        this.logRepository = repository;
         this.service = service;
     }
 
     @Override
     public ResponseEntity<List<SubscriptionInfo>> getSubscriptions() {
+        MongoLog log = new MongoLog("getSubscriptionsCalled", "Debug");
+        logRepository.save(log);
         return ResponseEntity.ok(service.getAllSubscriptions());
     }
 
