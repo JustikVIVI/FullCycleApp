@@ -29,6 +29,8 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.openapitools:jackson-databind-nullable:0.2.6")

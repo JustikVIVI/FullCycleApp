@@ -1,5 +1,4 @@
-# application.yml
-
+# application-production.yml
 spring:
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/learning_db}
@@ -11,4 +10,4 @@ spring:
     show-sql: true
   data:
     mongodb:
-      uri: ${MONGODB_DATABASE_URL:mongodb://localhost:27017/main_db}
+      uri: ${MONGO_DATABASE_URL}
